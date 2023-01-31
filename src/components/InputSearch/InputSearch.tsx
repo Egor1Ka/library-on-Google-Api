@@ -11,14 +11,19 @@ function InputSearch() {
   }
 
   const handleSearch:MouseEventHandler<HTMLSourceElement> = (e)=>{
+    state?.loadingHendler(true)
     if(state){
       if(state.searchInput.length<= 0 ){
-        state.setFiletrBook([]) /// not working 
+        state.setFiletrBook([])// erlier not working 
+        state?.loadingHendler(false)
       }else {
-        searchBook(state.searchInput)
+        setTimeout(()=>{
+          searchBook(state.searchInput)
         .then(data=>{
           state.setFiletrBook(data.items)
         })
+        .then(()=>state?.loadingHendler(false))
+        },3000)
       }    
     }
   }

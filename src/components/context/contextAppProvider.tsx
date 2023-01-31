@@ -7,13 +7,23 @@ interface contextProps{
 }
 
 const ContextAppProvider:FC<contextProps> = ({children})=>{
-    const [searchInput,setSearchInput] = useState('') 
+    const [searchInput,setSearchInput] = useState<string>('') 
     const [bookList,setBookArr] = useState<any[]>([])
     const [filterBookList,setfilterBookList] = useState<any[]>([])
+    const [isLoading,setIsLoading] = useState<boolean>(false)
+    const [activeBook,setActiveBook] = useState({})
+
+    const handleActiveBook = useCallback((book:any)=>{
+        setActiveBook(book)
+    },[activeBook])
 
     const setBookList = useCallback((newList:any[])=>{
         setBookArr(newList)
     },[bookList])
+
+    const loadingHendler = useCallback((loading:boolean)=>{
+        setIsLoading(loading)
+    },[isLoading])
 
     const setFiletrBook = useCallback((newFilterArr:any[])=>{
         setfilterBookList(newFilterArr)
@@ -27,9 +37,13 @@ const ContextAppProvider:FC<contextProps> = ({children})=>{
         searchInput,
         bookList,
         filterBookList,
+        isLoading,
+        activeBook,
+        handleActiveBook,
         setBookList,
         chengeSearchInput,
-        setFiletrBook
+        setFiletrBook,
+        loadingHendler
     }
     }> 
         {children}

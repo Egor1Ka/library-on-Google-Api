@@ -2,7 +2,7 @@ import { prependOnceListener } from 'process'
 import React, { FC, useEffect, useRef } from 'react'
 
 interface Iscroll{
-    currentScroll:number
+  currentScroll:number
 }
 
 const ScrolIndicator:FC<Iscroll>=({currentScroll})=> {   
@@ -10,7 +10,7 @@ const ScrolIndicator:FC<Iscroll>=({currentScroll})=> {
       <div 
       style={{width:`${currentScroll}%`}}
       className = 'preoressScrollIndicator'></div>
-    </div>
+  </div>
 
 }
 
